@@ -8,18 +8,28 @@ import Order from "./ui/pages/Order";
 import { initializeApp } from "firebase/app";
 import { ToastContainer } from "react-toastify";
 import NotFound from "./ui/pages/NotFound";
+import { firebaseConfig } from './utils/constants/user';
+import { useEffect } from 'react';
+import { getAuth, onAuthStateChanged } from 'firebase/auth';
+import { useDispatch } from 'react-redux';
+import { userActions } from './store/reducers/user/slicer';
+
+initializeApp(firebaseConfig);
 
 function App() {
-  const firebaseConfig = {
-    apiKey: "AIzaSyDwb4GOsZVUJQ-lSGRPbdsXra-XqGqorqk",
-    authDomain: "food-delivery-apptrix.firebaseapp.com",
-    projectId: "food-delivery-apptrix",
-    storageBucket: "food-delivery-apptrix.appspot.com",
-    messagingSenderId: "714461672684",
-    appId: "1:714461672684:web:5c9fc57c743266b98c21c9",
-  };
+  const dispatch = useDispatch();
 
-  initializeApp(firebaseConfig);
+  const auth = getAuth()
+
+  useEffect(() => {
+    onAuthStateChanged(auth, (user) =>
+      dispatch(userActions.setUserAccount({
+        uid: user? user.uid : null,
+        email: user? user.email : null,
+        displayName: user? user.displayName : null
+      }))
+    );
+  }, [auth, dispatch])
 
   return (
     <BrowserRouter>

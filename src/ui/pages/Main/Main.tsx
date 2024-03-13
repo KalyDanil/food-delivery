@@ -3,26 +3,27 @@ import MainStyle from "./MainStyle";
 import Registration from "./Registration";
 import Authorization from "./Authorization";
 import { useState } from "react";
-import { useAuthStateChanged } from "../../../utils/functions/hooks";
 import SignOutButton from "../../components/SignOutButton";
 import { useNavigate } from "react-router-dom";
 import { ROUTES } from "../../../utils/constants/routes";
+import { useSelector } from 'react-redux';
+import { RootStateType } from '../../../store';
 
 const Main = () => {
-  const [isRegistration, setIsRegistration] = useState(true);
+  const {account} = useSelector((state: RootStateType) => state.user);
 
-  const user = useAuthStateChanged(getAuth());
+  const [isRegistration, setIsRegistration] = useState(true);
 
   const navigate = useNavigate();
 
-  if (Object.is(user, null)) {
+  if (Object.is(account, null)) {
     return null;
   }
 
   return (
     <MainStyle>
       <h1>Food delivery</h1>
-      {user ? (
+      {account.uid ? (
         <div>
           <SignOutButton />
           <button onClick={() => navigate(ROUTES.MENU)}>Go to menu</button>

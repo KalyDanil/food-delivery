@@ -1,8 +1,8 @@
 import { ErrorMessage } from "formik";
-import { AuthInputProps } from "../../../types/auth";
+import { IAuthInputProps } from "../../../types/auth";
 import AuthInputStyle from "./AuthInputStyle";
 
-const AuthInput = (props: AuthInputProps) => {
+const AuthInput = (props: IAuthInputProps) => {
   const { id, label, handleChange, type } = props;
   return (
     <AuthInputStyle>

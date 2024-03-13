@@ -1,12 +1,6 @@
 import { HTMLInputTypeAttribute } from "react";
 
-export interface RegistrationError {
-  domain: string;
-  message: string;
-  reason: string;
-}
-
-export interface AuthInputProps {
+export interface IAuthInputProps {
   id: string;
   label: string;
   type: HTMLInputTypeAttribute;
