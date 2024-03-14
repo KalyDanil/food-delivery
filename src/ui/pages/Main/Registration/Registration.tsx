@@ -1,46 +1,25 @@
-import {
-  getAuth,
-  createUserWithEmailAndPassword,
-  updateProfile,
-} from "firebase/auth";
-import RegistrationStyle from "./RegistrationStyle";
-import { toast } from "react-toastify";
-import { Formik } from "formik";
-import { registrationSchema } from "./scheme";
-import AuthInput from "../../../components/AuthInput";
+import RegistrationStyle from './RegistrationStyle';
+import { Formik } from 'formik';
+import { registrationSchema } from './schema';
+import AuthInput from '../../../components/AuthInput';
+import { useDispatch } from '../../../../utils/functions/hooks';
+import userReq from '../../../../store/reducers/user/thunks';
 
 const Registration = () => {
+  const dispatch = useDispatch();
+
   return (
     <RegistrationStyle>
       <Formik
         initialValues={{
-          email: "",
-          password: "",
-          passwordRepeat: "",
-          displayName: "",
+          email: '',
+          password: '',
+          passwordRepeat: '',
+          displayName: '',
         }}
         validationSchema={registrationSchema}
         onSubmit={async (values) => {
-          const auth = getAuth();
-
-          try {
-            const userCredential = await createUserWithEmailAndPassword(
-              auth,
-              values.email,
-              values.password
-            );
-
-            updateProfile(userCredential.user, {
-              displayName: values.displayName,
-            });
-          } catch (error: any) {
-            if (error.code === "auth/email-already-in-use") {
-              toast("Email registered");
-              return;
-            }
-
-            toast(error.message);
-          }
+          dispatch(userReq.signUp(values));
         }}
       >
         {({ handleChange, handleSubmit }) => (

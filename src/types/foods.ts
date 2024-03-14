@@ -1,11 +1,15 @@
 export interface IFood {
-  id: number,
-  name: string,
-  price: number ,
-  image: string,
-  description: string
+  id: string;
+  name: string;
+  price: number;
+  image: string;
+  description: string;
+}
+
+export interface IOrderFood extends IFood {
+  amount: number;
 }
 
 export interface IFoodsSliceState {
-  foods: IFood[] | null
+  foods: IFood[];
 }

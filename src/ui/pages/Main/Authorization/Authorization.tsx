@@ -1,29 +1,20 @@
-import AuthorizationStyle from "./AuthorizationStyle";
-import { Formik } from "formik";
-import { authorizationSchema } from "./scheme";
-import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
-import { toast } from "react-toastify";
-import AuthInput from "../../../components/AuthInput";
+import AuthorizationStyle from './AuthorizationStyle';
+import { Formik } from 'formik';
+import { authorizationSchema } from './schema';
+import AuthInput from '../../../components/AuthInput';
+import userReq from '../../../../store/reducers/user/thunks';
+import { useDispatch } from '../../../../utils/functions/hooks';
 
 const Authorization = () => {
+  const dispatch = useDispatch();
+
   return (
     <AuthorizationStyle>
       <Formik
-        initialValues={{ email: "", password: "" }}
+        initialValues={{ email: '', password: '' }}
         validationSchema={authorizationSchema}
-        onSubmit={(values) => {
-          const auth = getAuth();
-
-          signInWithEmailAndPassword(auth, values.email, values.password).catch(
-            (error) => {
-              if (error.code === "auth/invalid-credential") {
-                toast("Email or password is wrong");
-                return;
-              }
-
-              toast(error.message);
-            }
-          );
+        onSubmit={async (values) => {
+          dispatch(userReq.signIn(values));
         }}
       >
         {({ handleChange, handleSubmit }) => (

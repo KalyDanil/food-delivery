@@ -1,5 +1,7 @@
-const initialState = {
-  foods: null
+import { IFoodsSliceState } from '../../../types/foods';
+
+const initialState: IFoodsSliceState = {
+  foods: [],
 };
 
-export default initialState
+export default initialState;

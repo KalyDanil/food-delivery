@@ -1,48 +1,40 @@
-import { getAuth } from "firebase/auth";
-import MainStyle from "./MainStyle";
-import Registration from "./Registration";
-import Authorization from "./Authorization";
-import { useState } from "react";
-import SignOutButton from "../../components/SignOutButton";
-import { useNavigate } from "react-router-dom";
-import { ROUTES } from "../../../utils/constants/routes";
-import { useSelector } from 'react-redux';
-import { RootStateType } from '../../../store';
+import MainStyle from './MainStyle';
+import Registration from './Registration';
+import Authorization from './Authorization';
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { ROUTES } from '../../../utils/constants/routes';
+import { useSelector } from '../../../utils/functions/hooks';
 
 const Main = () => {
-  const {account} = useSelector((state: RootStateType) => state.user);
+  const { account } = useSelector((state) => state.user);
 
   const [isRegistration, setIsRegistration] = useState(true);
 
   const navigate = useNavigate();
 
-  if (Object.is(account, null)) {
-    return null;
-  }
-
   return (
     <MainStyle>
       <h1>Food delivery</h1>
-      {account.uid ? (
+      {account.id ? (
         <div>
-          <SignOutButton />
           <button onClick={() => navigate(ROUTES.MENU)}>Go to menu</button>
         </div>
       ) : (
         <>
-          {" "}
+          {' '}
           <div className="main__tabsBox">
             <button
               className={`main__tab ${
-                isRegistration ? "main__tab-active" : ""
+                isRegistration ? 'main__tab-active' : ''
               }`}
               onClick={() => setIsRegistration(true)}
             >
               Registration
-            </button>{" "}
+            </button>{' '}
             <button
               className={`main__tab ${
-                !isRegistration ? "main__tab-active" : ""
+                !isRegistration ? 'main__tab-active' : ''
               }`}
               onClick={() => setIsRegistration(false)}
             >

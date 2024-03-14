@@ -1,38 +1,49 @@
-import { useNavigate } from "react-router-dom";
-import SignOutButton from "../../components/SignOutButton";
-import { ROUTES } from "../../../utils/constants/routes";
-import MenuStyle from "./MenuStyle";
-import { child, get, getDatabase, ref, set } from "firebase/database";
-import { useDispatch } from 'react-redux';
-import { foodsActions } from '../../../store/reducers/foods/slicer';
-import { useSelector } from 'react-redux';
-import { RootStateType } from '../../../store';
+import { useNavigate } from 'react-router-dom';
+import { ROUTES } from '../../../utils/constants/routes';
+import MenuStyle from './MenuStyle';
+import { useDispatch, useSelector } from '../../../utils/functions/hooks';
+import { useEffect, useRef, useState } from 'react';
+import foodsReq from '../../../store/reducers/foods/thunks';
+import FoodCard from '../../components/FoodCard';
 
 const Menu = () => {
-  const {account} = useSelector((state: RootStateType) => state.user)
-  
+  const { foods } = useSelector((state) => state.foods);
+
   const dispatch = useDispatch();
 
   const navigate = useNavigate();
 
-  const dbRef = ref(getDatabase());
+  const [limit, setLimit] = useState(20);
 
-  get(child(dbRef, `foods`)).then((snapshot) => {
-    if (snapshot.exists()) {
-      dispatch(foodsActions.setFoods(snapshot.val()))
-    } else {
-      console.log("No data available");
+  const listRef = useRef(null);
+
+  useEffect(() => {
+    dispatch(foodsReq.getFoods(limit));
+  }, [dispatch, limit]);
+
+  const onScroll = () => {
+    if (listRef.current) {
+      const { scrollTop, scrollHeight, clientHeight } = listRef.current;
+      if (scrollTop + clientHeight >= scrollHeight - 5) {
+        setLimit(limit + 10);
+      }
     }
-  }).catch((error) => {
-    console.error(error);
-  });
+  };
+
+  const menu = foods.map((item) => <FoodCard food={item} key={item.id} />);
 
   return (
     <MenuStyle>
       <h1>Menu</h1>
-      <SignOutButton />
-      <div>{account.displayName}</div>
-      <button onClick={() => navigate(ROUTES.MAIN)}>Go to main</button>
+      <div className="menu__list" ref={listRef} onScroll={onScroll}>
+        {menu}
+      </div>
+      <button
+        className="menu__toMainPageButton"
+        onClick={() => navigate(ROUTES.MAIN)}
+      >
+        Go to main
+      </button>
     </MenuStyle>
   );
 };

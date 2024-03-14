@@ -1,9 +1,22 @@
-const initialState = {
+import { IUserSliceState } from '../../../types/user';
+
+const initialState: IUserSliceState = {
   account: {
-    uid: null,
+    id: null,
     email: null,
-    displayName: null
-  }
+    displayName: null,
+  },
+  currentOrder: {
+    userId: null,
+    foods: [],
+    address: {
+      street: '',
+      home: '',
+      entrance: '',
+      apartment: '',
+    },
+    paymentType: '',
+  },
 };
 
-export default initialState
+export default initialState;

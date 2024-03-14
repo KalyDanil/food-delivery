@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 const NotFoundStyle = styled.div`
   text-align: center;

@@ -1,4 +1,4 @@
-import NotFoundStyle from "./NotFoundStyle";
+import NotFoundStyle from './NotFoundStyle';
 
 const NotFound = () => {
   return (
