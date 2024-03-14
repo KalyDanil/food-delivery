@@ -6,8 +6,11 @@ import { useNavigate } from 'react-router-dom';
 import { ROUTES } from '../../../utils/constants/routes';
 import { useEffect } from 'react';
 import Purchases from './Purchases';
+import { useTranslation } from 'react-i18next';
 
 const UserHeader = () => {
+  const { t } = useTranslation();
+
   const { account, chosenFoods } = useSelector((state) => state.user);
 
   const dispatch = useDispatch();
@@ -44,7 +47,7 @@ const UserHeader = () => {
         className="userHeader__logOut"
         onClick={() => dispatch(userReq.logOut())}
       >
-        Log out
+        {t('Log out')}
       </button>
     </UserHeaderStyle>
   );

@@ -1,14 +1,17 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useMemo, useState } from 'react';
 import { IFood, IOrderFood } from '../../../types/foods';
 import FoodCardStyle from './FoodCardStyle';
 import AmountInput from './AmountInput';
 import { useDispatch, useSelector } from '../../../utils/functions/hooks';
 import { userActions } from '../../../store/reducers/user/slicer';
+import { useTranslation } from 'react-i18next';
 
 const FoodCard: React.FC<{ food: IFood; canOrder?: boolean }> = ({
   food,
   canOrder = true,
 }) => {
+  const { t } = useTranslation();
+
   const { chosenFoods } = useSelector((state) => state.user);
 
   const dispatch = useDispatch();
@@ -47,20 +50,21 @@ const FoodCard: React.FC<{ food: IFood; canOrder?: boolean }> = ({
         <img className="foodCard__image" src={image} alt={name} />
       </div>
       <div>
-        <span className="foodCard__label">Name:</span> {name}
+        <span className="foodCard__label">{t('Name')}:</span> {name}
       </div>
       <div>
-        <span className="foodCard__label">Price:</span> {price}$
+        <span className="foodCard__label">{t('Price')}:</span> {price}$
       </div>
       <button
         className="foodCard__descriptionButton"
         onClick={() => setDescriptionIsOpen(!descriptionIsOpen)}
       >
-        {!descriptionIsOpen ? 'Open' : 'Close'} escription
+        {!descriptionIsOpen ? 'Open' : 'Close'} {t('Description')}
       </button>
       {descriptionIsOpen && (
         <div className="foodCard__description">
-          <span className="foodCard__label">Description:</span> {description}
+          <span className="foodCard__label">{t('Description')}:</span>{' '}
+          {description}
         </div>
       )}
       {canOrder ? (
@@ -69,12 +73,14 @@ const FoodCard: React.FC<{ food: IFood; canOrder?: boolean }> = ({
             <AmountInput amount={amount} setAmount={setAmount} />
           ) : (
             <button className="foodCard__addingButton" onClick={onClick}>
-              Add to shopping cart
+              {t('Add to shopping cart')}
             </button>
           )}
         </>
       ) : (
-        <div>Amount: {amount}</div>
+        <div>
+          {t('Amount')}: {amount}
+        </div>
       )}
     </FoodCardStyle>
   );

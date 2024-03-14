@@ -5,8 +5,11 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ROUTES } from '../../../utils/constants/routes';
 import { useSelector } from '../../../utils/functions/hooks';
+import { useTranslation } from 'react-i18next';
 
 const Main = () => {
+  const { t } = useTranslation();
+
   const { account } = useSelector((state) => state.user);
 
   const [isRegistration, setIsRegistration] = useState(true);
@@ -15,10 +18,10 @@ const Main = () => {
 
   return (
     <MainStyle>
-      <h1>Food delivery</h1>
+      <h1>{t('Food delivery')}</h1>
       {account.id ? (
         <div>
-          <button onClick={() => navigate(ROUTES.MENU)}>Go to menu</button>
+          <button onClick={() => navigate(ROUTES.MENU)}>{t('To menu')}</button>
         </div>
       ) : (
         <>
@@ -30,7 +33,7 @@ const Main = () => {
               }`}
               onClick={() => setIsRegistration(true)}
             >
-              Registration
+              {t('Registration')}
             </button>{' '}
             <button
               className={`main__tab ${
@@ -38,7 +41,7 @@ const Main = () => {
               }`}
               onClick={() => setIsRegistration(false)}
             >
-              Authorization
+              {t('Authorization')}
             </button>
           </div>
           {isRegistration ? <Registration /> : <Authorization />}

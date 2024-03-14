@@ -5,8 +5,11 @@ import { useDispatch, useSelector } from '../../../utils/functions/hooks';
 import { useEffect, useRef, useState } from 'react';
 import foodsReq from '../../../store/reducers/foods/thunks';
 import FoodCard from '../../components/FoodCard';
+import { useTranslation } from 'react-i18next';
 
 const Menu = () => {
+  const { t } = useTranslation();
+
   const { foods } = useSelector((state) => state.foods);
 
   const dispatch = useDispatch();
@@ -34,7 +37,7 @@ const Menu = () => {
 
   return (
     <MenuStyle>
-      <h1>Menu</h1>
+      <h1>{t('Menu')}</h1>
       <div className="menu__list" ref={listRef} onScroll={onScroll}>
         {menu}
       </div>
@@ -42,7 +45,7 @@ const Menu = () => {
         className="menu__toMainPageButton"
         onClick={() => navigate(ROUTES.MAIN)}
       >
-        Go to main
+        {t('To main')}
       </button>
     </MenuStyle>
   );

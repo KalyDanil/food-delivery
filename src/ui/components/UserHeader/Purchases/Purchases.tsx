@@ -2,8 +2,11 @@ import { useEffect, useState } from 'react';
 import { useSelector } from '../../../../utils/functions/hooks';
 import PurchasesStyle from './PurchasesStyle';
 import Menu from './Menu';
+import { useTranslation } from 'react-i18next';
 
 const Purchases = () => {
+  const { t } = useTranslation();
+
   const { orders } = useSelector((state) => state.user);
 
   const [menuIsOpen, setMenuIsOpen] = useState(false);
@@ -33,7 +36,10 @@ const Purchases = () => {
           src="/assets/icons/purchases.svg"
           alt="purchases"
         />
-        <div className="purchases__counter">{orders.length}qt.</div>
+        <div className="purchases__counter">
+          {orders.length}
+          {t('qt')}.
+        </div>
       </div>
     </PurchasesStyle>
   );

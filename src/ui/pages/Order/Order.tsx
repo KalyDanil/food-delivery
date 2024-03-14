@@ -5,15 +5,18 @@ import { IOrderFood } from '../../../types/foods';
 import { Formik } from 'formik';
 import Input from './Input';
 import PaymentTypesBox from './PaymentTypesBox';
-import { orderSchema } from './schema';
 import userReq from '../../../store/reducers/user/thunks';
 import { useNavigate } from 'react-router-dom';
 import { ROUTES } from '../../../utils/constants/routes';
 import { IOrder } from '../../../types/user';
 import { useState } from 'react';
 import ConfirmedOrder from './ConfirmedOrder';
+import { orderSchema } from '../../../utils/schemes/order';
+import { useTranslation } from 'react-i18next';
 
 const Order = () => {
+  const { t } = useTranslation();
+
   const { chosenFoods } = useSelector((state) => state.user);
 
   const dispatch = useDispatch();
@@ -46,12 +49,12 @@ const Order = () => {
 
   return (
     <OrderStyle>
-      <h1>Order</h1>
+      <h1>{t('Order')}</h1>
       <button
         className="order__toMenuButton"
         onClick={() => navigate(ROUTES.MENU)}
       >
-        To menu
+        {t('To menu')}
       </button>
       <div className="order__foodsList">{foodsList}</div>
       <Formik
@@ -85,25 +88,25 @@ const Order = () => {
           <form onSubmit={handleSubmit}>
             <Input
               id="street"
-              label="Street"
+              label={t('Street')}
               type="text"
               handleChange={handleChange}
             />
             <Input
               id="home"
-              label="Home"
+              label={t('Home')}
               type="text"
               handleChange={handleChange}
             />
             <Input
               id="entrance"
-              label="Entrance"
+              label={t('Entrance')}
               type="text"
               handleChange={handleChange}
             />
             <Input
               id="apartment"
-              label="Apartment"
+              label={t('Apartment')}
               type="text"
               handleChange={handleChange}
             />
@@ -111,8 +114,10 @@ const Order = () => {
               paymentType={values.paymentType}
               setFieldValue={setFieldValue}
             />
-            <div>Total price: {totalPrice}$</div>
-            <button type="submit">Make order</button>
+            <div>
+              {t('Total price')}: {totalPrice}$
+            </div>
+            <button type="submit">{t('Make order')}</button>
           </form>
         )}
       </Formik>

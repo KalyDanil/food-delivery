@@ -1,9 +1,12 @@
+import { useTranslation } from 'react-i18next';
 import PaymentTypesBoxStyle from './PaymentTypesBoxStyle';
 
 const PaymentTypesBox: React.FC<{
   paymentType: string;
   setFieldValue: (field: string, value: string) => void;
 }> = ({ paymentType, setFieldValue }) => {
+  const { t } = useTranslation();
+
   return (
     <PaymentTypesBoxStyle>
       <div
@@ -13,7 +16,7 @@ const PaymentTypesBox: React.FC<{
         <div
           className={`paymentTypesBox__checkbox ${paymentType === 'card' && 'paymentTypesBox__checkbox-active'}`}
         />
-        <span>Card</span>
+        <span>{t('Card')}</span>
       </div>
       <div
         className="paymentTypesBox__box"
@@ -22,7 +25,7 @@ const PaymentTypesBox: React.FC<{
         <div
           className={`paymentTypesBox__checkbox ${paymentType === 'cash' && 'paymentTypesBox__checkbox-active'}`}
         />
-        <span>Cash</span>
+        <span>{t('Cash')}</span>
       </div>
     </PaymentTypesBoxStyle>
   );

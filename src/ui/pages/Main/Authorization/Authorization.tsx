@@ -1,11 +1,14 @@
 import AuthorizationStyle from './AuthorizationStyle';
 import { Formik } from 'formik';
-import { authorizationSchema } from './schema';
 import AuthInput from '../../../components/AuthInput';
 import userReq from '../../../../store/reducers/user/thunks';
 import { useDispatch } from '../../../../utils/functions/hooks';
+import { authorizationSchema } from '../../../../utils/schemes/authorization';
+import { useTranslation } from 'react-i18next';
 
 const Authorization = () => {
+  const { t } = useTranslation();
+
   const dispatch = useDispatch();
 
   return (
@@ -21,17 +24,17 @@ const Authorization = () => {
           <form className="authorization__form" onSubmit={handleSubmit}>
             <AuthInput
               id="email"
-              label="Email"
+              label={t('Email')}
               type="email"
               handleChange={handleChange}
             />
             <AuthInput
               id="password"
-              label="Password"
+              label={t('Password')}
               type="password"
               handleChange={handleChange}
             />
-            <button type="submit">sign in</button>
+            <button type="submit">{t('Sign in')}</button>
           </form>
         )}
       </Formik>

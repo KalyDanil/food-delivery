@@ -12,6 +12,7 @@ import { LS_USER_ID } from '../../../../utils/constants/storage';
 import { ROUTES } from '../../../../utils/constants/routes';
 import { userActions } from '../slicer';
 import initialState from '../initialState';
+import i18n from '../../../../i18n';
 
 export const signUp = createAsyncThunk(
   'sign-up',
@@ -32,7 +33,7 @@ export const signUp = createAsyncThunk(
       });
     } catch (error: any) {
       if (error.code === 'auth/email-already-in-use') {
-        toast('Email registered');
+        toast(i18n.t('Email registered'));
         return;
       }
 
@@ -56,7 +57,7 @@ export const signIn = createAsyncThunk(
       localStorage.setItem(LS_USER_ID, res.user.uid);
     } catch (error: any) {
       if (error.code === 'auth/invalid-credential') {
-        toast('Email or password is wrong');
+        toast(i18n.t('Email or password is wrong'));
         return;
       }
 
@@ -73,7 +74,7 @@ export const logOut = createAsyncThunk(
 
       signOut(auth);
 
-      dispatch(userActions.setUserAccount(initialState.account))
+      dispatch(userActions.setUserAccount(initialState.account));
 
       localStorage.removeItem(LS_USER_ID);
 
