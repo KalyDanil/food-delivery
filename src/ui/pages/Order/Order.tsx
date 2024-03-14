@@ -7,13 +7,22 @@ import Input from './Input';
 import PaymentTypesBox from './PaymentTypesBox';
 import { orderSchema } from './schema';
 import userReq from '../../../store/reducers/user/thunks';
+import { useNavigate } from 'react-router-dom';
+import { ROUTES } from '../../../utils/constants/routes';
+import { IOrder } from '../../../types/user';
+import { useState } from 'react';
+import ConfirmedOrder from './ConfirmedOrder';
 
 const Order = () => {
-  const { currentOrder, account } = useSelector((state) => state.user);
+  const { chosenFoods } = useSelector((state) => state.user);
 
   const dispatch = useDispatch();
 
-  const foodsList = currentOrder.foods.map((item: IOrderFood) => {
+  const navigate = useNavigate();
+
+  const [confirmedOrder, setConfirmedOrder] = useState<IOrder | null>(null);
+
+  const foodsList = chosenFoods.map((item: IOrderFood) => {
     const food = {
       id: item.id,
       name: item.name,
@@ -24,9 +33,26 @@ const Order = () => {
     return <FoodCard food={food} key={food.id} />;
   });
 
+  const totalPrice = chosenFoods.reduce(
+    (accumulator: number, food: IOrderFood) => {
+      return accumulator + food.price * food.amount;
+    },
+    0,
+  );
+
+  if (confirmedOrder) {
+    return <ConfirmedOrder confirmedOrder={confirmedOrder} />;
+  }
+
   return (
     <OrderStyle>
       <h1>Order</h1>
+      <button
+        className="order__toMenuButton"
+        onClick={() => navigate(ROUTES.MENU)}
+      >
+        To menu
+      </button>
       <div className="order__foodsList">{foodsList}</div>
       <Formik
         initialValues={{
@@ -46,17 +72,17 @@ const Order = () => {
           };
 
           const data = {
-            userId: account.id,
             address,
             paymentType: values.paymentType,
-            foods: currentOrder.foods,
+            foods: chosenFoods,
+            totalPrice,
           };
 
-          dispatch(userReq.makeOrder(data));
+          dispatch(userReq.makeOrder({ data, setConfirmedOrder }));
         }}
       >
         {({ handleChange, handleSubmit, values, setFieldValue }) => (
-          <form className="authorization__form" onSubmit={handleSubmit}>
+          <form onSubmit={handleSubmit}>
             <Input
               id="street"
               label="Street"
@@ -85,6 +111,7 @@ const Order = () => {
               paymentType={values.paymentType}
               setFieldValue={setFieldValue}
             />
+            <div>Total price: {totalPrice}$</div>
             <button type="submit">Make order</button>
           </form>
         )}

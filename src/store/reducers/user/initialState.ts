@@ -6,17 +6,8 @@ const initialState: IUserSliceState = {
     email: null,
     displayName: null,
   },
-  currentOrder: {
-    userId: null,
-    foods: [],
-    address: {
-      street: '',
-      home: '',
-      entrance: '',
-      apartment: '',
-    },
-    paymentType: '',
-  },
+  chosenFoods: [],
+  orders: [],
 };
 
 export default initialState;

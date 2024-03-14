@@ -1,12 +1,15 @@
 import { useEffect, useMemo, useState } from 'react';
 import { IFood, IOrderFood } from '../../../types/foods';
 import FoodCardStyle from './FoodCardStyle';
-import AmountInput from '../AmountInput';
+import AmountInput from './AmountInput';
 import { useDispatch, useSelector } from '../../../utils/functions/hooks';
 import { userActions } from '../../../store/reducers/user/slicer';
 
-const FoodCard: React.FC<{ food: IFood }> = ({ food }) => {
-  const { currentOrder } = useSelector((state) => state.user);
+const FoodCard: React.FC<{ food: IFood; canOrder?: boolean }> = ({
+  food,
+  canOrder = true,
+}) => {
+  const { chosenFoods } = useSelector((state) => state.user);
 
   const dispatch = useDispatch();
 
@@ -15,16 +18,16 @@ const FoodCard: React.FC<{ food: IFood }> = ({ food }) => {
   const { id, name, price, description, image } = food;
 
   const amount: number = useMemo(() => {
-    if (currentOrder.foods.length === 0) {
+    if (chosenFoods.length === 0) {
       return 0;
     }
 
-    const food: IOrderFood | undefined = currentOrder.foods.find(
+    const food: IOrderFood | undefined = chosenFoods.find(
       (item) => item.id === id,
     );
 
     return food ? food.amount : 0;
-  }, [currentOrder.foods]);
+  }, [chosenFoods]);
 
   const onClick = () => {
     const orderFood: IOrderFood = Object.assign({ amount: 1 }, food);
@@ -47,7 +50,7 @@ const FoodCard: React.FC<{ food: IFood }> = ({ food }) => {
         <span className="foodCard__label">Name:</span> {name}
       </div>
       <div>
-        <span className="foodCard__label">Price:</span> {price}
+        <span className="foodCard__label">Price:</span> {price}$
       </div>
       <button
         className="foodCard__descriptionButton"
@@ -60,12 +63,18 @@ const FoodCard: React.FC<{ food: IFood }> = ({ food }) => {
           <span className="foodCard__label">Description:</span> {description}
         </div>
       )}
-      {amount > 0 ? (
-        <AmountInput amount={amount} setAmount={setAmount} />
+      {canOrder ? (
+        <>
+          {amount > 0 ? (
+            <AmountInput amount={amount} setAmount={setAmount} />
+          ) : (
+            <button className="foodCard__addingButton" onClick={onClick}>
+              Add to shopping cart
+            </button>
+          )}
+        </>
       ) : (
-        <button className="foodCard__addingButton" onClick={onClick}>
-          Add to shopping cart
-        </button>
+        <div>Amount: {amount}</div>
       )}
     </FoodCardStyle>
   );

@@ -4,26 +4,33 @@ import userReq from '../../../store/reducers/user/thunks';
 import { IOrderFood } from '../../../types/foods';
 import { useNavigate } from 'react-router-dom';
 import { ROUTES } from '../../../utils/constants/routes';
+import { useEffect } from 'react';
+import Purchases from './Purchases';
 
 const UserHeader = () => {
-  const { account, currentOrder } = useSelector((state) => state.user);
+  const { account, chosenFoods } = useSelector((state) => state.user);
 
   const dispatch = useDispatch();
 
   const navigate = useNavigate();
 
-  const totalPrice = currentOrder.foods.reduce(
+  useEffect(() => {
+    if (account.id) {
+      dispatch(userReq.getOrders(account.id));
+    }
+  }, [dispatch, account.id]);
+
+  const totalPrice = chosenFoods.reduce(
     (accumulator: number, food: IOrderFood) => {
       return accumulator + food.price * food.amount;
     },
     0,
   );
 
-  const amount = currentOrder.foods.length;
-
   return (
     <UserHeaderStyle>
       <span>{account.displayName}</span>
+      <Purchases />
       <div className="userHeader__shoppingCartBox">
         <img
           className="userHeader__shoppingCartIcon"
@@ -31,7 +38,6 @@ const UserHeader = () => {
           onClick={() => navigate(ROUTES.ORDER)}
           alt="shopping cart"
         />
-        <div className="userHeader__counter">{amount}qt.</div>
         <div className="userHeader__totalPrice">{totalPrice}$</div>
       </div>
       <button

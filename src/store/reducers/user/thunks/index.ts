@@ -1,6 +1,6 @@
 import { signUp, signIn, logOut } from './auth';
 import { getUser } from './info';
-import { makeOrder } from './order';
+import { getOrders, makeOrder } from './order';
 
 export const userReq = {
   signUp,
@@ -8,6 +8,7 @@ export const userReq = {
   logOut,
   getUser,
   makeOrder,
+  getOrders,
 };
 
 export default userReq;

@@ -30,7 +30,7 @@ const AmountInputStyle = styled.div`
       width: 20px;
       height: auto;
       position: absolute;
-      right: 0;
+      right: -35px;
       cursor: pointer;
     }
   }

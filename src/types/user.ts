@@ -7,8 +7,8 @@ export interface IAccount {
   displayName: string | null;
 }
 
-export interface ICurrentOrder {
-  userId: string | null;
+export interface IOrder {
+  id?: string;
   foods: IOrderFood[];
   address: {
     street: string;
@@ -17,11 +17,13 @@ export interface ICurrentOrder {
     apartment: string;
   };
   paymentType: string;
+  totalPrice: number;
 }
 
 export interface IUserSliceState {
   account: IAccount;
-  currentOrder: ICurrentOrder;
+  chosenFoods: IOrderFood[];
+  orders: IOrder[];
 }
 
 export interface ISignUpValues {

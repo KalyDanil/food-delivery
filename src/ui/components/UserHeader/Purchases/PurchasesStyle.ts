@@ -1,24 +1,20 @@
 import styled from 'styled-components';
 
-const UserHeaderStyle = styled.div`
-  display: flex;
-  position: absolute;
-  top: 10px;
-  right: 10px;
+const PurchasesStyle = styled.div`
+  position: relative;
 
-  .userHeader {
-    &__shoppingCartBox {
+  .purchases {
+    &__iconBox {
       position: relative;
       cursor: pointer;
     }
 
-    &__shoppingCartIcon {
-      width: 50px;
+    &__icon {
       height: 50px;
-      cursor: pointer;
+      width: 50px;
     }
 
-    &__totalPrice {
+    &__counter {
       height: 40px;
       width: 40px;
       display: flex;
@@ -32,11 +28,7 @@ const UserHeaderStyle = styled.div`
       overflow: hidden;
       border-radius: 50%;
     }
-
-    &__logOut {
-      margin-left: 10px;
-    }
   }
 `;
 
-export default UserHeaderStyle;
+export default PurchasesStyle;

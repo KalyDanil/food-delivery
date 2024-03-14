@@ -28,7 +28,7 @@ function App() {
 
   return (
     <BrowserRouter>
-      <ToastContainer autoClose={2000} />
+      <ToastContainer autoClose={200000} />
       {account.id && <UserHeader />}
       <Routes>
         <Route path="/" element={<Navigate to={ROUTES.MAIN} />} />

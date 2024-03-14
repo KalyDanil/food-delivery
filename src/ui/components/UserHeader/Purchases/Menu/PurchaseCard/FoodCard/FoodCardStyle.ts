@@ -1,15 +1,12 @@
 import styled from 'styled-components';
 
 const FoodCardStyle = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
 
   .foodCard {
     &__imageBox {
-      width: 200px;
-      height: 200px;
+      width: 100px;
+      height: 100px;
     }
 
     &__image {
@@ -23,9 +20,9 @@ const FoodCardStyle = styled.div`
       font-weight: 600;
     }
 
-    &__descriptionButton {
-      display: block;
-      margin-bottom: 10px;
+    &__opennessSymbol {
+      width: 10px;
+      height: 10px;
     }
 
     &__description {

@@ -1,24 +1,29 @@
 import styled from 'styled-components';
 
-const OrderStyle = styled.div`
+const ConfirmedOrderStyle = styled.div`
   width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
 
-  .order {
-    &__toMenuButton {
-      position: absolute;
-      left: 10px;
-      top: 10px;
+  .confirmedOrder {
+    &__label {
+      font-size: 18px;
+      font-weight: 600;
     }
 
-    &__foodsList {
+    &__foodBox {
       width: 100%;
-      height: 340px;
       max-width: 1000px;
+      text-align: center;
       margin-left: auto;
       margin-right: auto;
+      border: 1px solid;
+    }
+
+    &__foodList {
+      width: 100%;
+      height: 320px;
       display: flex;
       justify-content: space-around;
       flex-wrap: wrap;
@@ -28,4 +33,4 @@ const OrderStyle = styled.div`
   }
 `;
 
-export default OrderStyle;
+export default ConfirmedOrderStyle;

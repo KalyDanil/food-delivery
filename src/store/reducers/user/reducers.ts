@@ -1,5 +1,5 @@
-import { IFood, IOrderFood } from '../../../types/foods';
-import { IAccount, ICurrentOrder, IUserSliceState } from '../../../types/user';
+import { IOrderFood } from '../../../types/foods';
+import { IAccount, IOrder, IUserSliceState } from '../../../types/user';
 import { PayloadAction } from '@reduxjs/toolkit';
 
 const reducers = {
@@ -11,10 +11,10 @@ const reducers = {
     action: PayloadAction<IOrderFood>,
   ) => {
     const orderFood = action.payload;
-    const index = state.currentOrder.foods.findIndex(
+    const index = state.chosenFoods.findIndex(
       (item) => item.id === orderFood.id,
     );
-    const foods = [...state.currentOrder.foods];
+    const foods = [...state.chosenFoods];
 
     if (index > -1) {
       if (orderFood.amount === 0) {
@@ -23,13 +23,16 @@ const reducers = {
         foods.splice(index, 1, orderFood);
       }
 
-      state.currentOrder.foods = foods;
+      state.chosenFoods = foods;
       return;
     }
 
     foods.push(orderFood);
 
-    state.currentOrder.foods = foods;
+    state.chosenFoods = foods;
+  },
+  setOrders: (state: IUserSliceState, action: PayloadAction<IOrder[]>) => {
+    state.orders = action.payload;
   },
 };
 

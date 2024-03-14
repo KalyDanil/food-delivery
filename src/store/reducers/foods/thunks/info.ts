@@ -12,6 +12,7 @@ import {
   ref,
 } from 'firebase/database';
 import { foodsActions } from '../slicer';
+import { IFood } from '../../../../types/foods';
 
 export const getFoods = createAsyncThunk(
   'get-foods',
@@ -22,11 +23,15 @@ export const getFoods = createAsyncThunk(
 
       const snapshot = await get(query(dbRef, ...[limitToFirst(limit)]));
 
-      if (snapshot.exists()) {
-        dispatch(foodsActions.setFoods(snapshot.val()));
-      } else {
-        dispatch(foodsActions.setFoods([]));
-      }
+      const foods: IFood[] = [];
+
+      snapshot.forEach((childSnapshot) => {
+        foods.push(
+          Object.assign({ id: childSnapshot.key }, childSnapshot.val()),
+        );
+      });
+
+      dispatch(foodsActions.setFoods(foods));
     } catch (error) {
       console.error(error);
     }
