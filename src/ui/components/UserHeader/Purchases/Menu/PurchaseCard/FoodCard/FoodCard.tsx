@@ -20,15 +20,11 @@ const FoodCard: React.FC<{ food: IOrderFood }> = ({ food }) => {
       </div>
       <div>
         <span
-          className="foodCard__label"
+          className="foodCard__descriptionButton"
           onClick={() => setDescriptionIsOpen(!descriptionIsOpen)}
         >
           {t('Description')}
-          <img
-            className="foodCard__opennessSymbol"
-            src={`/assets/icons/${descriptionIsOpen ? 'minus.svg' : 'plus.svg'}`}
-            alt="openness symbol"
-          />
+          {descriptionIsOpen ? '-' : '+'}
         </span>{' '}
         {descriptionIsOpen && <>:{description}</>}
       </div>

@@ -1,24 +1,25 @@
 import { ErrorMessage } from 'formik';
 import { IInputProps } from '../../../../types/user';
-import InputStyle from './InputStyle';
+import InputBoxStyle from './InputBoxStyle';
 
-const Input = (props: IInputProps) => {
+const InputBox = (props: IInputProps) => {
   const { id, label, handleChange, type } = props;
 
   return (
-    <InputStyle>
-      <label className="input__label" htmlFor={id}>
+    <InputBoxStyle>
+      <label className="inputBox__label" htmlFor={id}>
         {label}
       </label>
       <input
         id={id}
+        className="inputBox__input"
         type={type}
         autoComplete={id === 'password' ? 'on' : ''}
         onChange={handleChange}
       />
-      <ErrorMessage className="input__error" name={id} component="div" />
-    </InputStyle>
+      <ErrorMessage className="inputBox__error" name={id} component="div" />
+    </InputBoxStyle>
   );
 };
 
-export default Input;
+export default InputBox;

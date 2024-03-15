@@ -3,7 +3,7 @@ import FoodCard from '../../components/FoodCard';
 import OrderStyle from './OrderStyle';
 import { IOrderFood } from '../../../types/foods';
 import { Formik } from 'formik';
-import Input from './Input';
+import Input from './InputBox';
 import PaymentTypesBox from './PaymentTypesBox';
 import userReq from '../../../store/reducers/user/thunks';
 import { useNavigate } from 'react-router-dom';
@@ -85,39 +85,44 @@ const Order = () => {
         }}
       >
         {({ handleChange, handleSubmit, values, setFieldValue }) => (
-          <form onSubmit={handleSubmit}>
-            <Input
-              id="street"
-              label={t('Street')}
-              type="text"
-              handleChange={handleChange}
-            />
-            <Input
-              id="home"
-              label={t('Home')}
-              type="text"
-              handleChange={handleChange}
-            />
-            <Input
-              id="entrance"
-              label={t('Entrance')}
-              type="text"
-              handleChange={handleChange}
-            />
-            <Input
-              id="apartment"
-              label={t('Apartment')}
-              type="text"
-              handleChange={handleChange}
-            />
+          <form className="order__form" onSubmit={handleSubmit}>
+            <div className="order__inputsBox">
+              <Input
+                id="street"
+                label={t('Street')}
+                type="text"
+                handleChange={handleChange}
+              />
+              <Input
+                id="home"
+                label={t('Home')}
+                type="text"
+                handleChange={handleChange}
+              />
+              <Input
+                id="entrance"
+                label={t('Entrance')}
+                type="text"
+                handleChange={handleChange}
+              />
+              <Input
+                id="apartment"
+                label={t('Apartment')}
+                type="text"
+                handleChange={handleChange}
+              />
+            </div>
             <PaymentTypesBox
               paymentType={values.paymentType}
               setFieldValue={setFieldValue}
             />
-            <div>
-              {t('Total price')}: {totalPrice}$
+            <div className="order__totalPrice">
+              <span className="order__label">{t('Total price')}:</span>{' '}
+              {totalPrice}$
             </div>
-            <button type="submit">{t('Make order')}</button>
+            <button className="order__submitButton" type="submit">
+              {t('Make order')}
+            </button>
           </form>
         )}
       </Formik>

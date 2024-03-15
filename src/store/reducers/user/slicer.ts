@@ -1,7 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import reducers from './reducers';
 import initialState from './initialState';
-import userReq from './thunks';
 import extraReducers from './extraReducers';
 
 export const userSlice = createSlice({

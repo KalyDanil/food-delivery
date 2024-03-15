@@ -19,7 +19,7 @@ const UserHeader = () => {
 
   useEffect(() => {
     if (account.id) {
-      dispatch(userReq.getOrders(account.id));
+      dispatch(userReq.getOrders());
     }
   }, [dispatch, account.id]);
 
@@ -32,23 +32,27 @@ const UserHeader = () => {
 
   return (
     <UserHeaderStyle>
-      <span>{account.displayName}</span>
       <Purchases />
-      <div className="userHeader__shoppingCartBox">
+      <div
+        className="userHeader__shoppingCartBox"
+        onClick={() => navigate(ROUTES.ORDER)}
+      >
         <img
           className="userHeader__shoppingCartIcon"
           src="/assets/icons/shoppingCart.svg"
-          onClick={() => navigate(ROUTES.ORDER)}
           alt="shopping cart"
         />
         <div className="userHeader__totalPrice">{totalPrice}$</div>
       </div>
-      <button
-        className="userHeader__logOut"
-        onClick={() => dispatch(userReq.logOut())}
-      >
-        {t('Log out')}
-      </button>
+      <div className="userHeader__box">
+        <div className="userHeader__displayName">{account.displayName}</div>
+        <button
+          className="userHeader__logOut"
+          onClick={() => dispatch(userReq.logOut())}
+        >
+          {t('Log out')}
+        </button>
+      </div>
     </UserHeaderStyle>
   );
 };

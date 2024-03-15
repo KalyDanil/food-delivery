@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import style from '../../../style';
 
 const LoaderStyle = styled.div`
   display: flex;
@@ -21,8 +22,8 @@ const LoaderStyle = styled.div`
     &__icon {
       width: 120px;
       height: 120px;
-      border: 16px solid #f3f3f3; /* Light grey */
-      border-top: 16px solid #3498db; /* Blue */
+      border: 16px solid ${style.colors.white}; /* Light grey */
+      border-top: 16px solid ${style.colors.violet}; /* Blue */
       border-radius: 50%;
       animation: spin 2s linear infinite;
 

@@ -22,19 +22,23 @@ const Authorization = () => {
       >
         {({ handleChange, handleSubmit }) => (
           <form className="authorization__form" onSubmit={handleSubmit}>
-            <AuthInput
-              id="email"
-              label={t('Email')}
-              type="email"
-              handleChange={handleChange}
-            />
-            <AuthInput
-              id="password"
-              label={t('Password')}
-              type="password"
-              handleChange={handleChange}
-            />
-            <button type="submit">{t('Sign in')}</button>
+            <div className="authorization__inputsBox">
+              <AuthInput
+                id="email"
+                label={t('Email')}
+                type="email"
+                handleChange={handleChange}
+              />
+              <AuthInput
+                id="password"
+                label={t('Password')}
+                type="password"
+                handleChange={handleChange}
+              />
+            </div>
+            <button className="authorization__submitButton" type="submit">
+              {t('Sign in')}
+            </button>
           </form>
         )}
       </Formik>

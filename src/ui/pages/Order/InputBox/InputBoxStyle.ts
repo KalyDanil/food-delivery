@@ -1,12 +1,12 @@
 import styled from 'styled-components';
-import style from '../../../style';
+import style from '../../../../style';
 
-const AuthInputStyle = styled.div`
+const InputBoxStyle = styled.div`
   width: 140px;
   height: 50px;
   margin-bottom: 10px;
 
-  .authInput {
+  .inputBox {
     &__label {
       position: relative;
       left: 5px;
@@ -27,4 +27,4 @@ const AuthInputStyle = styled.div`
   }
 `;
 
-export default AuthInputStyle;
+export default InputBoxStyle;

@@ -6,11 +6,17 @@ const reducers = {
   setUserAccount: (state: IUserSliceState, action: PayloadAction<IAccount>) => {
     state.account = action.payload;
   },
-  changeCurrentOrderFoods: (
+  changeChosenFoods: (
     state: IUserSliceState,
-    action: PayloadAction<IOrderFood>,
+    action: PayloadAction<IOrderFood | null>,
   ) => {
     const orderFood = action.payload;
+
+    if (!orderFood) {
+      state.chosenFoods = [];
+      return;
+    }
+
     const index = state.chosenFoods.findIndex(
       (item) => item.id === orderFood.id,
     );
@@ -33,6 +39,9 @@ const reducers = {
   },
   setOrders: (state: IUserSliceState, action: PayloadAction<IOrder[]>) => {
     state.orders = action.payload;
+  },
+  pushOrder: (state: IUserSliceState, action: PayloadAction<IOrder>) => {
+    state.orders.push(action.payload);
   },
 };
 

@@ -13,7 +13,7 @@ const Menu = () => {
   ));
   return (
     <MenuStyle>
-      <h3>{t('Purchases')}</h3>
+      <h2>{t('Purchases')}</h2>
       <div className="menu__purchasesList">{purchasesList}</div>
     </MenuStyle>
   );

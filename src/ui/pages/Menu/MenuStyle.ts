@@ -1,6 +1,8 @@
 import styled from 'styled-components';
+import style from '../../../style';
 
 const MenuStyle = styled.div`
+  width: 100%;
   height: 100%;
   display: flex;
   flex-direction: column;
@@ -8,6 +10,7 @@ const MenuStyle = styled.div`
 
   .menu {
     &__toMainPageButton {
+      ${style.button.navigation}
       position: absolute;
       top: 10px;
       left: 10px;

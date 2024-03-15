@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import style from '../../../../../style';
 
 const MenuStyle = styled.div`
   width: 300px;
@@ -12,13 +13,18 @@ const MenuStyle = styled.div`
   z-index: 100;
   border: 1px solid;
   border-radius: 10px;
-  background-color: gray;
+  background-color: ${style.colors.orange};
+  box-shadow: 0 0 5px ${style.colors.white};
   color: white;
+  @media screen and (max-width: ${style.breakPoints.first}) {
+    top: 40px;
+    right: unset;
+    left: -40px;
+  }
 
   .menu {
     &__purchasesList {
       height: 90%;
-      padding-left: 5px;
       display: flex;
       flex-direction: column;
       overflow: auto;

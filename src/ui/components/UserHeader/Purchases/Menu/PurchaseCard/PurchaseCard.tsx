@@ -19,22 +19,12 @@ const PurchaseCard: React.FC<{ order: IOrder }> = ({ order }) => {
         <span className="purchaseCard__label">{t('Order number')}:</span> {id}
       </div>
       <div>
-        <span className="purchaseCard__label">{t('Total price')}:</span>{' '}
-        {totalPrice}$
+        <span className="purchaseCard__label">{t('Payment type')}:</span>{' '}
+        {paymentType}
       </div>
       <div>
-        <button
-          className="purchaseCard__foodsButton"
-          onClick={() => setFoodsIsOpen(!foodsIsOpen)}
-        >
-          {t('Foods')}
-          <img
-            className="purchaseCard__opennessSymbol"
-            src={`/assets/icons/${foodsIsOpen ? 'minus.svg' : 'plus.svg'}`}
-            alt="plus"
-          />
-        </button>
-        {foodsIsOpen && <div>{foodsList}</div>}
+        <span className="purchaseCard__label">{t('Total price')}:</span>{' '}
+        {totalPrice}$
       </div>
       <div>
         <span className="purchaseCard__label">{t('Address')}:</span>{' '}
@@ -42,8 +32,16 @@ const PurchaseCard: React.FC<{ order: IOrder }> = ({ order }) => {
         {address.apartment}
       </div>
       <div>
-        <span className="purchaseCard__label">{t('Payment type')}:</span>{' '}
-        {paymentType}
+        <button
+          className="purchaseCard__foodsButton"
+          onClick={() => setFoodsIsOpen(!foodsIsOpen)}
+        >
+          {t('Foods')}
+          {foodsIsOpen ? '-' : '+'}
+        </button>
+        {foodsIsOpen && (
+          <div className="purchaseCard__foodsList">{foodsList}</div>
+        )}
       </div>
     </PurchaseCardStyle>
   );

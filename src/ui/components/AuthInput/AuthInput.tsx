@@ -11,6 +11,7 @@ const AuthInput = (props: IInputProps) => {
         {label}
       </label>
       <input
+        className="authInput__input"
         id={id}
         type={type}
         autoComplete={id === 'password' ? 'on' : ''}

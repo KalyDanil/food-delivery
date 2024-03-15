@@ -2,8 +2,7 @@ import { useQuery } from '@tanstack/react-query';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
 import { useDispatch } from 'react-redux';
 import { userActions } from '../../../store/reducers/user/slicer';
-import { ROUTES } from '../../../utils/constants/routes';
-import { Navigate, Outlet } from 'react-router-dom';
+import { Outlet } from 'react-router-dom';
 import { LS_USER_ID } from '../../../utils/constants/storage';
 
 const AuthGuard = () => {

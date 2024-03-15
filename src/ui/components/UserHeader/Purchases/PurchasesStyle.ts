@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import style from '../../../../style';
 
 const PurchasesStyle = styled.div`
   position: relative;
@@ -12,6 +13,10 @@ const PurchasesStyle = styled.div`
     &__icon {
       height: 50px;
       width: 50px;
+      @media screen and (max-width: ${style.breakPoints.first}) {
+        width: 30px;
+        height: 30px;
+      }
     }
 
     &__counter {
@@ -24,9 +29,16 @@ const PurchasesStyle = styled.div`
       top: 30px;
       right: 20px;
       z-index: 1;
-      background-color: #bbb;
+      background-color: ${style.colors.violet};
+      color: ${style.colors.white};
       overflow: hidden;
       border-radius: 50%;
+      @media screen and (max-width: ${style.breakPoints.first}) {
+        width: 20px;
+        height: 20px;
+        top: 25px;
+        font-size: ${style.fontSize.tiny};
+      }
     }
   }
 `;

@@ -27,30 +27,32 @@ const Registration = () => {
       >
         {({ handleChange, handleSubmit }) => (
           <form className="registration__form" onSubmit={handleSubmit}>
-            <AuthInput
-              id="displayName"
-              label={t('Display name')}
-              type="displayName"
-              handleChange={handleChange}
-            />
-            <AuthInput
-              id="email"
-              label={t('Email')}
-              type="email"
-              handleChange={handleChange}
-            />
-            <AuthInput
-              id="password"
-              label={t('Password')}
-              type="password"
-              handleChange={handleChange}
-            />
-            <AuthInput
-              id="passwordRepeat"
-              label={t('Password repeat')}
-              type="password"
-              handleChange={handleChange}
-            />
+            <div className="registration__inputsBox">
+              <AuthInput
+                id="displayName"
+                label={t('Display name')}
+                type="displayName"
+                handleChange={handleChange}
+              />
+              <AuthInput
+                id="email"
+                label={t('Email')}
+                type="email"
+                handleChange={handleChange}
+              />
+              <AuthInput
+                id="password"
+                label={t('Password')}
+                type="password"
+                handleChange={handleChange}
+              />
+              <AuthInput
+                id="passwordRepeat"
+                label={t('Password repeat')}
+                type="password"
+                handleChange={handleChange}
+              />
+            </div>
             <button className="registration__submitButton" type="submit">
               {t('Sign up')}
             </button>

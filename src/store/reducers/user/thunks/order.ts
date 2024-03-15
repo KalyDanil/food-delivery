@@ -4,8 +4,7 @@ import { toast } from 'react-toastify';
 import { IOrder } from '../../../../types/user';
 import { RootStateType } from '../../..';
 import { userActions } from '../slicer';
-import { NavigateFunction } from 'react-router-dom';
-import { ROUTES } from '../../../../utils/constants/routes';
+import { LS_USER_ID } from '../../../../utils/constants/storage';
 
 export const makeOrder = createAsyncThunk(
   'make-order',
@@ -29,6 +28,8 @@ export const makeOrder = createAsyncThunk(
 
       await set(newOrderRef, data);
 
+      dispatch(userActions.pushOrder(newOrderData));
+
       setConfirmedOrder(newOrderData);
     } catch (error: any) {
       toast(error.message);
@@ -38,9 +39,10 @@ export const makeOrder = createAsyncThunk(
 
 export const getOrders = createAsyncThunk(
   'get-orders',
-  async (userId: string, { dispatch }) => {
+  async (params, { dispatch }) => {
     try {
       const db = getDatabase();
+      const userId = localStorage.getItem(LS_USER_ID);
       const dbRef = ref(db, `user/${userId}/orders`);
 
       const snapshot = await get(query(dbRef));

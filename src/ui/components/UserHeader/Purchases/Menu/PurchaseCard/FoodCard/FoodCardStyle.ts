@@ -1,7 +1,9 @@
 import styled from 'styled-components';
+import style from '../../../../../../../style';
 
 const FoodCardStyle = styled.div`
   margin-bottom: 10px;
+  border-bottom: 1px solid;
 
   .foodCard {
     &__imageBox {
@@ -17,6 +19,7 @@ const FoodCardStyle = styled.div`
     }
 
     &__label {
+      color: ${style.colors.black};
       font-weight: 600;
     }
 
@@ -29,6 +32,16 @@ const FoodCardStyle = styled.div`
       width: 200px;
       height: 200px;
       overflow: auto;
+    }
+
+    &__descriptionButton {
+      color: ${style.colors.violet};
+      font-weight: 600;
+      cursor: pointer;
+
+      &:hover {
+        text-shadow: 0 0 5px ${style.colors.white};
+      }
     }
 
     &__addingButton {
