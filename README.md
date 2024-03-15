@@ -1,3 +1,7 @@
+# Quick application launch
+1. Install package.json by scripts `npm install`
+2. Start app by scripts `npm start`
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
