@@ -1,46 +1,44 @@
-import AuthorizationStyle from "./AuthorizationStyle";
-import { Formik } from "formik";
-import { authorizationSchema } from "./scheme";
-import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
-import { toast } from "react-toastify";
-import AuthInput from "../../../components/AuthInput";
+import AuthorizationStyle from './AuthorizationStyle';
+import { Formik } from 'formik';
+import AuthInput from '../../../components/AuthInput';
+import userReq from '../../../../store/reducers/user/thunks';
+import { useDispatch } from '../../../../utils/functions/hooks';
+import { authorizationSchema } from '../../../../utils/schemes/authorization';
+import { useTranslation } from 'react-i18next';
 
 const Authorization = () => {
+  const { t } = useTranslation();
+
+  const dispatch = useDispatch();
+
   return (
     <AuthorizationStyle>
       <Formik
-        initialValues={{ email: "", password: "" }}
+        initialValues={{ email: '', password: '' }}
         validationSchema={authorizationSchema}
-        onSubmit={(values) => {
-          const auth = getAuth();
-
-          signInWithEmailAndPassword(auth, values.email, values.password).catch(
-            (error) => {
-              if (error.code === "auth/invalid-credential") {
-                toast("Email or password is wrong");
-                return;
-              }
-
-              toast(error.message);
-            }
-          );
+        onSubmit={async (values) => {
+          dispatch(userReq.signIn(values));
         }}
       >
         {({ handleChange, handleSubmit }) => (
           <form className="authorization__form" onSubmit={handleSubmit}>
-            <AuthInput
-              id="email"
-              label="Email"
-              type="email"
-              handleChange={handleChange}
-            />
-            <AuthInput
-              id="password"
-              label="Password"
-              type="password"
-              handleChange={handleChange}
-            />
-            <button type="submit">sign in</button>
+            <div className="authorization__inputsBox">
+              <AuthInput
+                id="email"
+                label={t('Email')}
+                type="email"
+                handleChange={handleChange}
+              />
+              <AuthInput
+                id="password"
+                label={t('Password')}
+                type="password"
+                handleChange={handleChange}
+              />
+            </div>
+            <button className="authorization__submitButton" type="submit">
+              {t('Sign in')}
+            </button>
           </form>
         )}
       </Formik>

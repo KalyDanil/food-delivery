@@ -1,76 +1,60 @@
-import {
-  getAuth,
-  createUserWithEmailAndPassword,
-  updateProfile,
-} from "firebase/auth";
-import RegistrationStyle from "./RegistrationStyle";
-import { toast } from "react-toastify";
-import { Formik } from "formik";
-import { registrationSchema } from "./scheme";
-import AuthInput from "../../../components/AuthInput";
+import RegistrationStyle from './RegistrationStyle';
+import { Formik } from 'formik';
+import AuthInput from '../../../components/AuthInput';
+import { useDispatch } from '../../../../utils/functions/hooks';
+import userReq from '../../../../store/reducers/user/thunks';
+import { registrationSchema } from '../../../../utils/schemes/registration';
+import { useTranslation } from 'react-i18next';
 
 const Registration = () => {
+  const { t } = useTranslation();
+
+  const dispatch = useDispatch();
+
   return (
     <RegistrationStyle>
       <Formik
         initialValues={{
-          email: "",
-          password: "",
-          passwordRepeat: "",
-          displayName: "",
+          email: '',
+          password: '',
+          passwordRepeat: '',
+          displayName: '',
         }}
         validationSchema={registrationSchema}
         onSubmit={async (values) => {
-          const auth = getAuth();
-
-          try {
-            const userCredential = await createUserWithEmailAndPassword(
-              auth,
-              values.email,
-              values.password
-            );
-
-            updateProfile(userCredential.user, {
-              displayName: values.displayName,
-            });
-          } catch (error: any) {
-            if (error.code === "auth/email-already-in-use") {
-              toast("Email registered");
-              return;
-            }
-
-            toast(error.message);
-          }
+          dispatch(userReq.signUp(values));
         }}
       >
         {({ handleChange, handleSubmit }) => (
           <form className="registration__form" onSubmit={handleSubmit}>
-            <AuthInput
-              id="displayName"
-              label="Display name"
-              type="displayName"
-              handleChange={handleChange}
-            />
-            <AuthInput
-              id="email"
-              label="Email"
-              type="email"
-              handleChange={handleChange}
-            />
-            <AuthInput
-              id="password"
-              label="Password"
-              type="password"
-              handleChange={handleChange}
-            />
-            <AuthInput
-              id="passwordRepeat"
-              label="Password repeat"
-              type="password"
-              handleChange={handleChange}
-            />
+            <div className="registration__inputsBox">
+              <AuthInput
+                id="displayName"
+                label={t('Display name')}
+                type="displayName"
+                handleChange={handleChange}
+              />
+              <AuthInput
+                id="email"
+                label={t('Email')}
+                type="email"
+                handleChange={handleChange}
+              />
+              <AuthInput
+                id="password"
+                label={t('Password')}
+                type="password"
+                handleChange={handleChange}
+              />
+              <AuthInput
+                id="passwordRepeat"
+                label={t('Password repeat')}
+                type="password"
+                handleChange={handleChange}
+              />
+            </div>
             <button className="registration__submitButton" type="submit">
-              sign up
+              {t('Sign up')}
             </button>
           </form>
         )}

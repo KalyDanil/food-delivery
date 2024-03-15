@@ -1,4 +1,5 @@
-import styled from "styled-components";
+import styled from 'styled-components';
+import style from '../../../../style';
 
 const RegistrationStyle = styled.div`
   .registration {
@@ -8,18 +9,14 @@ const RegistrationStyle = styled.div`
       align-items: center;
     }
 
-    &__inputLine {
-      width: 140px;
+    &__inputsBox {
       margin-bottom: 10px;
     }
 
-    &__inputLabel {
-      font-size: 12px;
-    }
-
-    &__error {
-      font-size: 12px;
-      color: red;
+    &__submitButton {
+      ${style.button.base}
+      font-size: ${style.fontSize.medium};
+      border-radius: 10px;
     }
   }
 `;

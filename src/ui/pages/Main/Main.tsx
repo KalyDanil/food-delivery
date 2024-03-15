@@ -1,51 +1,50 @@
-import { getAuth } from "firebase/auth";
-import MainStyle from "./MainStyle";
-import Registration from "./Registration";
-import Authorization from "./Authorization";
-import { useState } from "react";
-import { useAuthStateChanged } from "../../../utils/functions/hooks";
-import SignOutButton from "../../components/SignOutButton";
-import { useNavigate } from "react-router-dom";
-import { ROUTES } from "../../../utils/constants/routes";
+import MainStyle from './MainStyle';
+import Registration from './Registration';
+import Authorization from './Authorization';
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { ROUTES } from '../../../utils/constants/routes';
+import { useTranslation } from 'react-i18next';
+import { getUserId } from '../../../utils/functions/user';
 
 const Main = () => {
-  const [isRegistration, setIsRegistration] = useState(true);
+  const { t } = useTranslation();
 
-  const user = useAuthStateChanged(getAuth());
+  const [isRegistration, setIsRegistration] = useState(false);
 
   const navigate = useNavigate();
 
-  if (Object.is(user, null)) {
-    return null;
-  }
-
   return (
     <MainStyle>
-      <h1>Food delivery</h1>
-      {user ? (
+      <h1>{t('Food delivery')}</h1>
+      {getUserId() ? (
         <div>
-          <SignOutButton />
-          <button onClick={() => navigate(ROUTES.MENU)}>Go to menu</button>
+          <button
+            className="main__toMenuButton"
+            onClick={() => navigate(ROUTES.MENU)}
+          >
+            {t('To menu')}
+          </button>
         </div>
       ) : (
         <>
-          {" "}
+          {' '}
           <div className="main__tabsBox">
             <button
               className={`main__tab ${
-                isRegistration ? "main__tab-active" : ""
-              }`}
-              onClick={() => setIsRegistration(true)}
-            >
-              Registration
-            </button>{" "}
-            <button
-              className={`main__tab ${
-                !isRegistration ? "main__tab-active" : ""
+                !isRegistration ? 'main__tab-active' : ''
               }`}
               onClick={() => setIsRegistration(false)}
             >
-              Authorization
+              {t('Authorization')}
+            </button>
+            <button
+              className={`main__tab ${
+                isRegistration ? 'main__tab-active' : ''
+              }`}
+              onClick={() => setIsRegistration(true)}
+            >
+              {t('Registration')}
             </button>
           </div>
           {isRegistration ? <Registration /> : <Authorization />}

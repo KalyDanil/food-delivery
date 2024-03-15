@@ -1,9 +1,12 @@
-import NotFoundStyle from "./NotFoundStyle";
+import { useTranslation } from 'react-i18next';
+import NotFoundStyle from './NotFoundStyle';
 
 const NotFound = () => {
+  const { t } = useTranslation();
+
   return (
     <NotFoundStyle>
-      <h1>Page not found</h1>
+      <h1>{t('Page not found')}</h1>
     </NotFoundStyle>
   );
 };

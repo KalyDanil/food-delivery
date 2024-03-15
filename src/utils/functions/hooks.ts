@@ -1,19 +1,12 @@
-import { Auth, User, onAuthStateChanged } from "firebase/auth";
-import { useEffect, useState } from "react";
+import {
+  type TypedUseSelectorHook,
+  useSelector as useReduxSelector,
+} from 'react-redux';
+import type { RootStateType } from '../../store';
+import { useDispatch as useReduxDispatch } from 'react-redux';
+import type { AppDispatchType } from '../../store';
 
-export const useAuthStateChanged = (auth: Auth) => {
-  const [user, setUser] = useState<null | User | undefined>(null);
+export const useSelector: TypedUseSelectorHook<RootStateType> =
+  useReduxSelector;
 
-  useEffect(() => {
-    onAuthStateChanged(auth, (user) => {
-      if (user) {
-        setUser(user);
-        return;
-      }
-
-      setUser(undefined);
-    });
-  }, [auth]);
-
-  return user;
-};
+export const useDispatch: () => AppDispatchType = useReduxDispatch;
