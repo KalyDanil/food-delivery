@@ -11,9 +11,9 @@ import { useTranslation } from 'react-i18next';
 const UserHeader = () => {
   const { t } = useTranslation();
 
-  const { account, chosenFoods } = useSelector((state) => state.user);
-
   const dispatch = useDispatch();
+
+  const { account, chosenFoods } = useSelector((state) => state.user);
 
   const navigate = useNavigate();
 

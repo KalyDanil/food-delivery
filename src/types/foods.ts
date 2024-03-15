@@ -9,7 +9,3 @@ export interface IFood {
 export interface IOrderFood extends IFood {
   amount: number;
 }
-
-export interface IFoodsSliceState {
-  foods: IFood[];
-}

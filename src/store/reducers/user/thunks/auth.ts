@@ -31,6 +31,14 @@ export const signUp = createAsyncThunk(
       updateProfile(res.user, {
         displayName: values.displayName,
       });
+
+      dispatch(
+        userActions.setUserAccount({
+          id: res.user.uid,
+          email: values.email,
+          displayName: values.displayName,
+        }),
+      );
     } catch (error: any) {
       if (error.code === 'auth/email-already-in-use') {
         toast(i18n.t('Email registered'));
