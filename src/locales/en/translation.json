@@ -39,5 +39,6 @@
   "qt": "qt",
   "Purchases": "Purchases",
   "Email registered": "Email registered",
-  "Email or password is wrong": "Email or password is wrong"
+  "Email or password is wrong": "Email or password is wrong",
+  "Must be a number": "Must be a number"
 }

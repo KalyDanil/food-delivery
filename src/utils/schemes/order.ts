@@ -6,13 +6,13 @@ export const orderSchema = yup.object().shape({
   home: yup
     .number()
     .required(i18n.t('Obligatory field'))
-    .typeError('Must be a number'),
+    .typeError(i18n.t('Must be a number')),
   entrance: yup
     .number()
     .required(i18n.t('Obligatory field'))
-    .typeError('Must be a number'),
+    .typeError(i18n.t('Must be a number')),
   apartment: yup
     .number()
     .required(i18n.t('Obligatory field'))
-    .typeError('Must be a number'),
+    .typeError(i18n.t('Must be a number')),
 });

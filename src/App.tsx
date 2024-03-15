@@ -14,11 +14,13 @@ import { RouterForAuthorized } from './utils/functions/privateRouters';
 import { useDispatch, useSelector } from './utils/functions/hooks';
 import userReq from './store/reducers/user/thunks';
 import UserHeader from './ui/components/UserHeader';
+import Loader from './ui/components/Loader';
+import { LS_USER_ID } from './utils/constants/storage';
 
 initializeApp(firebaseConfig);
 
 function App() {
-  const { account } = useSelector((state) => state.user);
+  const { account, isLoading } = useSelector((state) => state.user);
 
   const dispatch = useDispatch();
 
@@ -28,8 +30,9 @@ function App() {
 
   return (
     <BrowserRouter>
+      {isLoading && <Loader />}
       <ToastContainer autoClose={3000} />
-      {account.id && <UserHeader />}
+      {localStorage.getItem(LS_USER_ID) && <UserHeader />}
       <Routes>
         <Route path="/" element={<Navigate to={ROUTES.MAIN} />} />
         <Route path={ROUTES.MAIN} element={<Main />} />

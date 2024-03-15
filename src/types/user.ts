@@ -24,6 +24,7 @@ export interface IUserSliceState {
   account: IAccount;
   chosenFoods: IOrderFood[];
   orders: IOrder[];
+  isLoading: boolean;
 }
 
 export interface ISignUpValues {

@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import { ROUTES } from '../../../utils/constants/routes';
 import { useSelector } from '../../../utils/functions/hooks';
 import { useTranslation } from 'react-i18next';
+import { LS_USER_ID } from '../../../utils/constants/storage';
 
 const Main = () => {
   const { t } = useTranslation();
@@ -19,7 +20,7 @@ const Main = () => {
   return (
     <MainStyle>
       <h1>{t('Food delivery')}</h1>
-      {account.id ? (
+      {localStorage.getItem(LS_USER_ID) ? (
         <div>
           <button onClick={() => navigate(ROUTES.MENU)}>{t('To menu')}</button>
         </div>

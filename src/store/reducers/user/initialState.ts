@@ -8,6 +8,7 @@ const initialState: IUserSliceState = {
   },
   chosenFoods: [],
   orders: [],
+  isLoading: false,
 };
 
 export default initialState;

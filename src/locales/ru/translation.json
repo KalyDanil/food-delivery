@@ -39,5 +39,6 @@
   "qt": "шт",
   "Purchases": "Покупки",
   "Email registered": "Электронная почта зарегистрирована",
-  "Email or password is wrong": "Адрес электронной почты или пароль неверены"
+  "Email or password is wrong": "Адрес электронной почты или пароль неверены",
+  "Must be a number": "Необходимо число"
 }
