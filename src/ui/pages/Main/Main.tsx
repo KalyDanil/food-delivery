@@ -5,7 +5,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ROUTES } from '../../../utils/constants/routes';
 import { useTranslation } from 'react-i18next';
-import { LS_USER_ID } from '../../../utils/constants/storage';
+import { getUserId } from '../../../utils/functions/user';
 
 const Main = () => {
   const { t } = useTranslation();
@@ -17,7 +17,7 @@ const Main = () => {
   return (
     <MainStyle>
       <h1>{t('Food delivery')}</h1>
-      {localStorage.getItem(LS_USER_ID) ? (
+      {getUserId() ? (
         <div>
           <button
             className="main__toMenuButton"

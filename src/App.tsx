@@ -12,9 +12,9 @@ import { RouterForAuthorized } from './utils/functions/privateRouters';
 import { useSelector } from './utils/functions/hooks';
 import UserHeader from './ui/components/UserHeader';
 import Loader from './ui/components/Loader';
-import { LS_USER_ID } from './utils/constants/storage';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import AuthGuard from './ui/components/AuthGuard';
+import { getUserId } from './utils/functions/user';
 
 initializeApp(firebaseConfig);
 
@@ -28,7 +28,7 @@ function App() {
       {isLoading && <Loader />}
       <ToastContainer autoClose={3000} />
       <QueryClientProvider client={queryClient}>
-        {localStorage.getItem(LS_USER_ID) && <UserHeader />}
+        {getUserId() && <UserHeader />}
         <Routes>
           <Route path="/" element={<AuthGuard />}>
             <Route path="/" element={<Navigate to={ROUTES.MAIN} />} />

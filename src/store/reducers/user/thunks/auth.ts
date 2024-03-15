@@ -13,6 +13,7 @@ import { ROUTES } from '../../../../utils/constants/routes';
 import { userActions } from '../slicer';
 import initialState from '../initialState';
 import i18n from '../../../../i18n';
+import { setUserId } from '../../../../utils/functions/user';
 
 export const signUp = createAsyncThunk(
   'sign-up',
@@ -26,7 +27,7 @@ export const signUp = createAsyncThunk(
         values.password,
       );
 
-      localStorage.setItem(LS_USER_ID, res.user.uid);
+      setUserId(res.user.uid);
 
       updateProfile(res.user, {
         displayName: values.displayName,
@@ -62,7 +63,7 @@ export const signIn = createAsyncThunk(
         values.password,
       );
 
-      localStorage.setItem(LS_USER_ID, res.user.uid);
+      setUserId(res.user.uid);
     } catch (error: any) {
       if (error.code === 'auth/invalid-credential') {
         toast(i18n.t('Email or password is wrong'));

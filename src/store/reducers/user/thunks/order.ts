@@ -4,7 +4,7 @@ import { toast } from 'react-toastify';
 import { IOrder } from '../../../../types/user';
 import { RootStateType } from '../../..';
 import { userActions } from '../slicer';
-import { LS_USER_ID } from '../../../../utils/constants/storage';
+import { getUserId } from '../../../../utils/functions/user';
 
 export const makeOrder = createAsyncThunk(
   'make-order',
@@ -42,7 +42,7 @@ export const getOrders = createAsyncThunk(
   async (params, { dispatch }) => {
     try {
       const db = getDatabase();
-      const userId = localStorage.getItem(LS_USER_ID);
+      const userId = getUserId();
       const dbRef = ref(db, `user/${userId}/orders`);
 
       const snapshot = await get(query(dbRef));

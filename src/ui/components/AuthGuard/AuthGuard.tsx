@@ -4,6 +4,7 @@ import { useDispatch } from 'react-redux';
 import { userActions } from '../../../store/reducers/user/slicer';
 import { Outlet } from 'react-router-dom';
 import { LS_USER_ID } from '../../../utils/constants/storage';
+import { setUserId } from '../../../utils/functions/user';
 
 const AuthGuard = () => {
   const dispatch = useDispatch();
@@ -21,7 +22,7 @@ const AuthGuard = () => {
         );
 
         if (user) {
-          localStorage.setItem(LS_USER_ID, user.uid);
+          setUserId(user.uid);
           return;
         }
 
