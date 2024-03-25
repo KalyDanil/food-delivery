@@ -1,6 +1,5 @@
-# Quick application launch
-1. Install package.json by scripts `npm install`
-2. Start app by scripts `npm start`
+# Deployed application
+Link: https://65f462886b4f830093296353--resilient-duckanoo-fda6d2.netlify.app/main
 
 # Getting Started with Create React App
 
