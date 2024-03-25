@@ -1,10 +1,9 @@
 export const firebaseConfig = {
-  apiKey: 'AIzaSyDwb4GOsZVUJQ-lSGRPbdsXra-XqGqorqk',
-  authDomain: 'food-delivery-apptrix.firebaseapp.com',
-  projectId: 'food-delivery-apptrix',
-  storageBucket: 'food-delivery-apptrix.appspot.com',
-  messagingSenderId: '714461672684',
-  appId: '1:714461672684:web:5c9fc57c743266b98c21c9',
-  databaseURL:
-    'https://food-delivery-apptrix-default-rtdb.europe-west1.firebasedatabase.app/',
+  apiKey: process.env.REACT_APP_SERVER_API_KEY,
+  authDomain: process.env.REACT_APP_SERVER_AUTH_DOMAIN,
+  projectId: process.env.REACT_APP_SERVER_PROJECT_ID,
+  storageBucket: process.env.REACT_APP_SERVER_STORAGE_BUCKET,
+  messagingSenderId: process.env.REACT_APP_SERVER_MESSAGING_SENDER_ID,
+  appId: process.env.REACT_APP_SERVER_API_ID,
+  databaseURL: process.env.REACT_APP_SERVER_DATA_BASE_URL,
 };
