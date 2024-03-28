@@ -1,5 +1,5 @@
 # Deployed application
-Link: https://65f462886b4f830093296353--resilient-duckanoo-fda6d2.netlify.app/main
+Link: https://kaliy-danil-food-delivery.netlify.app/main
 
 # Getting Started with Create React App
 
